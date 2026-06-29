@@ -470,3 +470,150 @@ var user2 = provider.GetRequiredService<IUserService>();
 **Important:** A transient dependency is **not recreated** every time you use the parent service. It is recreated **only when the parent service itself is being constructed**.
 
 That's a subtle distinction that interviewers often test.
+
+---
+
+# How are services resolved?
+
+When a service is requested, the .NET DI container uses IServiceProvider to resolve it. It first looks up the service registration to determine the implementation type and lifetime. If the service is a Singleton, it returns the existing instance or creates one if it doesn't exist. If it's Scoped, it returns the existing instance for the current request or creates one if it's the first resolution in that scope. If it's Transient, it always creates a new instance. While creating the object, the container inspects its constructor, recursively resolves all constructor dependencies, builds the complete object graph, and finally returns the fully constructed service.
+
+---
+
+# Multiple implementations of same interface?
+
+# Multiple Implementations of the Same Interface (Interview Notes)
+
+## Definition
+
+> ASP.NET Core allows multiple implementations of the same interface to be registered. If a single instance of the interface is injected, the **last registered implementation** is injected. If `IEnumerable<T>` is injected, the DI container resolves **all registered implementations** in the order they were registered. While resolving them, it still respects their registered lifetimes (Transient, Scoped, Singleton).
+
+---
+
+## Example
+
+```csharp
+public interface IMessageService { }
+
+public class EmailService : IMessageService { }
+
+public class SmsService : IMessageService { }
+```
+
+Registration:
+
+```csharp
+services.AddScoped<IMessageService, EmailService>();
+services.AddScoped<IMessageService, SmsService>();
+```
+
+---
+
+## Case 1: Inject a single implementation
+
+```csharp
+public class NotificationService
+{
+    public NotificationService(IMessageService service)
+    {
+    }
+}
+```
+
+Injected service:
+
+```
+SmsService
+```
+
+> **Reason:** The last registered implementation wins.
+
+---
+
+## Case 2: Inject all implementations
+
+```csharp
+public class NotificationService
+{
+    public NotificationService(IEnumerable<IMessageService> services)
+    {
+    }
+}
+```
+
+Injected:
+
+```
+[
+    EmailService,
+    SmsService
+]
+```
+
+> **Reason:** `IEnumerable<T>` resolves every registered implementation in registration order.
+
+---
+
+# Follow-up 1
+
+```csharp
+services.AddScoped<IMessageService, EmailService>();
+services.AddScoped<IMessageService, SmsService>();
+```
+
+```csharp
+public class NotificationService
+{
+    public NotificationService(IEnumerable<IMessageService> services)
+    {
+    }
+}
+```
+
+### Question
+
+**How many objects are created when `NotificationService` is resolved for the first time in a request?**
+
+### Answer
+
+```
+EmailService -> 1
+SmsService   -> 1
+
+Total = 2 objects
+```
+
+Because both are **Scoped**, and this is their first resolution in the current request.
+
+---
+
+# Follow-up 2
+
+Later in the **same HTTP request**:
+
+```csharp
+var services =
+    provider.GetRequiredService<IEnumerable<IMessageService>>();
+```
+
+### Question
+
+**How many new objects are created?**
+
+### Answer
+
+```
+0
+```
+
+Because both scoped instances already exist in the current request, so the DI container reuses them.
+
+---
+
+# Key Rules (Must Remember)
+
+- **Single interface injection (`IMessageService`)** → Last registered implementation.
+- **`IEnumerable<IMessageService>`** → All implementations.
+- **Transient** → New instance every resolution.
+- **Scoped** → One instance per request/scope.
+- **Singleton** → One instance per application lifetime.
+- **The DI container always respects the registered lifetime, even when resolving multiple implementations.**
