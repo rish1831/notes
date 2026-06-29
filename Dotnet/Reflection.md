@@ -1,5 +1,29 @@
 # Reflection
 
+## Quick Lookup
+
+### What is reflection?
+
+Short version: Runtime inspection of metadata such as types, methods, properties, and attributes.
+
+### Where is it used?
+
+Short version: DI, serialization, model binding, test discovery, and ORMs.
+
+### Main downside?
+
+Short version: Reflection is slower, less type-safe, and can fail at runtime.
+
+## Most Important FAQ
+
+### What is the interview answer?
+
+Reflection lets a program inspect type information at runtime, such as classes, methods, properties, and attributes. Frameworks use it for dependency injection, serialization, and test discovery.
+
+### What should I never forget?
+
+Reflection trades compile-time safety for runtime flexibility. Use it carefully, cache metadata when repeated, and prefer normal strongly typed code when possible.
+
 ## Interview answer
 
 Reflection lets a program inspect type information at runtime, such as classes, methods, properties, and attributes. Frameworks use it for dependency injection, serialization, and test discovery.

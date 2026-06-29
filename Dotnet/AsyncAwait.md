@@ -1,18 +1,52 @@
 # Async and Concurrency in .NET
 
+## Most Important FAQ
+
+### Does `async` create a new thread?
+
+No. `async` creates a state machine. For I/O-bound work, the thread is released while the operation is pending and the continuation runs later when the operation completes.
+
+### What causes the most common async deadlock?
+
+Blocking on async code with `.Result` or `.Wait()` while a captured synchronization context is waiting for the same continuation.
+
 ## Quick revision
 
-| Topic | Remember |
-|---|---|
-| `async`/`await` | A compiler-generated state machine; it does not automatically create a thread |
-| `Task` | Represents an operation, not a thread |
-| Async I/O | Frees the thread while waiting for external work |
-| `Task.Run` | Queues CPU-bound work to the ThreadPool |
-| `Task.WhenAll` | Concurrently waits for several independent tasks |
-| `Parallel.ForEach` | Uses parallel threads for synchronous CPU-bound iterations |
-| `ConfigureAwait(false)` | Does not require resuming on the captured context |
-| `ValueTask<T>` | Allocation optimization for frequently synchronous completion |
-| `CancellationToken` | Cooperative cancellation request, not forced termination |
+### `async`/`await`
+
+Short version: A compiler-generated state machine; it does not automatically create a thread.
+
+### `Task`
+
+Short version: Represents an operation, not a thread.
+
+### Async I/O
+
+Short version: Frees the thread while waiting for external work.
+
+### `Task.Run`
+
+Short version: Queues CPU-bound work to the ThreadPool.
+
+### `Task.WhenAll`
+
+Short version: Concurrently waits for several independent tasks.
+
+### `Parallel.ForEach`
+
+Short version: Uses parallel threads for synchronous CPU-bound iterations.
+
+### `ConfigureAwait(false)`
+
+Short version: Does not require resuming on the captured context.
+
+### `ValueTask<T>`
+
+Short version: Allocation optimization for frequently synchronous completion.
+
+### `CancellationToken`
+
+Short version: Cooperative cancellation request, not forced termination.
 
 > Core distinction: concurrency is handling multiple operations in overlapping periods; parallelism is executing work simultaneously, usually on multiple CPU cores.
 
@@ -75,11 +109,29 @@ Task<int> calculation = Task.Run(() => Enumerable.Range(1, 100).Sum());
 int result = await calculation;
 ```
 
-| Concept | Represents | Managed by | Typical use |
-|---|---|---|---|
-| `Thread` | An OS execution thread | Developer and OS | Dedicated work needing direct control |
-| `ThreadPool` | Reusable worker threads | .NET runtime | Short background CPU work |
-| `Task` | An asynchronous operation | Task Parallel Library | Composable async or parallel work |
+### `Thread`
+
+Represents: An OS execution thread.
+
+Managed by: Developer and OS.
+
+Typical use: Dedicated work needing direct control.
+
+### `ThreadPool`
+
+Represents: Reusable worker threads.
+
+Managed by: .NET runtime.
+
+Typical use: Short background CPU work.
+
+### `Task`
+
+Represents: An asynchronous operation.
+
+Managed by: Task Parallel Library.
+
+Typical use: Composable async or parallel work.
 
 In short, a `Thread` is an execution resource, the `ThreadPool` manages reusable execution resources, and a `Task` describes work.
 

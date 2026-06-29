@@ -1,5 +1,33 @@
 # Resource Management
 
+## Quick Lookup
+
+### `IDisposable`
+
+Short version: Deterministic cleanup for external resources.
+
+### `using`
+
+Short version: Ensures `Dispose()` runs even when an exception occurs.
+
+### Finalizer
+
+Short version: Unpredictable fallback for direct unmanaged ownership.
+
+### Common mistake
+
+Short version: Waiting for GC to release external resources.
+
+## Most Important FAQ
+
+### Does GC call `Dispose()`?
+
+No. The garbage collector reclaims managed memory. It does not guarantee timely cleanup of external resources such as files, sockets, database connections, or native handles.
+
+### When should I implement `IDisposable`?
+
+Implement `IDisposable` when your class owns disposable resources or directly owns unmanaged resources. Dispose only what your class owns.
+
 ## IDisposable
 
 **Interview answer:** `IDisposable` provides predictable cleanup for resources such as files, database connections, and native handles. `using` ensures `Dispose()` runs even when an exception occurs.

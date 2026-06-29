@@ -2,16 +2,41 @@
 
 Use this page for .NET GC fundamentals, generations, the Large Object Heap, and memory leaks.
 
+## Most Important FAQ
+
+### What does GC do?
+
+Garbage Collection automatically reclaims managed heap memory for objects that are no longer reachable.
+
+### What causes memory leaks in .NET?
+
+Objects stay alive when something still references them, such as static collections, events, timers, caches, or long-lived closures.
+
 ## Quick Map
 
-| Concept | Short version |
-| --- | --- |
-| GC | Automatically reclaims heap memory from unreachable objects. |
-| Gen 0 | New, usually short-lived objects. |
-| Gen 1 | Middle generation for objects that survived one collection. |
-| Gen 2 | Long-lived objects and expensive full collections. |
-| LOH | Large objects, usually 85,000 bytes or more, collected with Gen 2. |
-| Memory leak | Object remains reachable longer than intended. |
+### GC
+
+Short version: Automatically reclaims heap memory from unreachable objects.
+
+### Gen 0
+
+Short version: New, usually short-lived objects.
+
+### Gen 1
+
+Short version: Middle generation for objects that survived one collection.
+
+### Gen 2
+
+Short version: Long-lived objects. Gen 2 collections are more expensive because they scan more memory.
+
+### LOH
+
+Short version: Large Object Heap. Used for large objects, usually 85,000 bytes or more, and collected with Gen 2.
+
+### Memory leak
+
+Short version: An object remains reachable longer than intended, so the GC cannot collect it.
 
 ## What Is GC?
 

@@ -1,16 +1,44 @@
 # Attributes in C# and .NET
 
+## Most Important FAQ
+
+### What are attributes?
+
+Attributes are metadata attached to code elements such as classes, methods, properties, or parameters. Frameworks read them using reflection or source generation to change behavior.
+
+### Do attributes execute business logic by themselves?
+
+No. Attributes store metadata. Some framework or custom code must read that metadata and act on it.
+
 ## Quick revision
 
-| Topic | Remember |
-|---|---|
-| Attribute | Declarative metadata attached to a program element |
-| Storage | Written into assembly metadata at compilation |
-| Base type | Every attribute derives from `System.Attribute` |
-| Reading | Usually inspected through reflection by frameworks or tools |
-| Naming | `[Serializable]` is shorthand for `[SerializableAttribute]` |
-| Parameters | Constructor arguments are positional; properties are named |
-| Behavior | An attribute does nothing unless code or tooling reads it |
+### Attribute
+
+Short version: Declarative metadata attached to a program element.
+
+### Storage
+
+Short version: Written into assembly metadata at compilation.
+
+### Base type
+
+Short version: Every attribute derives from `System.Attribute`.
+
+### Reading
+
+Short version: Usually inspected through reflection by frameworks or tools.
+
+### Naming
+
+Short version: `[Serializable]` is shorthand for `[SerializableAttribute]`.
+
+### Parameters
+
+Short version: Constructor arguments are positional; properties are named.
+
+### Behavior
+
+Short version: An attribute does nothing unless code or tooling reads it.
 
 ## What are attributes?
 
@@ -197,13 +225,25 @@ Use attributes when metadata is declarative and cross-cutting. Prefer normal met
 
 ## Attributes vs other approaches
 
-| Approach | Best suited for |
-|---|---|
-| Attribute | Static declarative metadata attached to code |
-| Interface | A behavioral contract implemented by a type |
-| Configuration | Values that may vary by environment or deployment |
-| Convention | Applying behavior based on naming or structure |
-| Method call | Explicit behavior visible in normal control flow |
+### Attribute
+
+Best suited for: Static declarative metadata attached to code.
+
+### Interface
+
+Best suited for: A behavioral contract implemented by a type.
+
+### Configuration
+
+Best suited for: Values that may vary by environment or deployment.
+
+### Convention
+
+Best suited for: Applying behavior based on naming or structure.
+
+### Method call
+
+Best suited for: Explicit behavior visible in normal control flow.
 
 ## Common pitfalls
 

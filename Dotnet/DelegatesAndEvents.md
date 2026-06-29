@@ -1,16 +1,44 @@
 # Delegates and Events in C#
 
+## Most Important FAQ
+
+### What is a delegate?
+
+A delegate is a type-safe reference to a method. It lets methods be passed around as values.
+
+### Why use an event instead of exposing a delegate?
+
+An event restricts external code to subscribe/unsubscribe only. External code cannot directly invoke or overwrite the invocation list.
+
 ## Quick revision
 
-| Topic | Remember |
-|---|---|
-| Delegate | Type-safe reference to one or more compatible methods |
-| `Action` | Accepts inputs and returns `void` |
-| `Func` | Accepts inputs and returns a value; the last type argument is the result |
-| `Predicate<T>` | Accepts `T` and returns `bool` |
-| Event | Restricted delegate used for publisher-subscriber notification |
-| Covariance | `out`: a more derived result can be used as a base result |
-| Contravariance | `in`: a base-type consumer can be used as a derived-type consumer |
+### Delegate
+
+Short version: Type-safe reference to one or more compatible methods.
+
+### `Action`
+
+Short version: Accepts inputs and returns `void`.
+
+### `Func`
+
+Short version: Accepts inputs and returns a value; the last type argument is the result.
+
+### `Predicate<T>`
+
+Short version: Accepts `T` and returns `bool`.
+
+### Event
+
+Short version: Restricted delegate used for publisher-subscriber notification.
+
+### Covariance
+
+Short version: `out`; a more derived result can be used as a base result.
+
+### Contravariance
+
+Short version: `in`; a base-type consumer can be used as a derived-type consumer.
 
 ## Question 1: What are delegates?
 
@@ -58,11 +86,23 @@ Events help one component notify others without being tightly coupled to them. E
 
 `Action`, `Func`, and `Predicate` are built-in generic delegate types.
 
-| Delegate | Returns | Typical purpose |
-|---|---|---|
-| `Action<T>` | `void` | Perform an operation |
-| `Func<T, TResult>` | A value | Transform data or calculate a result |
-| `Predicate<T>` | `bool` | Test whether a value matches a condition |
+### `Action<T>`
+
+Returns: `void`.
+
+Typical purpose: Perform an operation.
+
+### `Func<T, TResult>`
+
+Returns: A value.
+
+Typical purpose: Transform data or calculate a result.
+
+### `Predicate<T>`
+
+Returns: `bool`.
+
+Typical purpose: Test whether a value matches a condition.
 
 ```csharp
 Action<string> print = message => Console.WriteLine(message);

@@ -2,14 +2,33 @@
 
 Use this page for managed vs unmanaged resources, `Dispose`, database connections, and connection pooling.
 
+## Most Important FAQ
+
+### What is managed memory?
+
+Managed memory is allocated and tracked by the CLR and cleaned up by the garbage collector.
+
+### Why should DB connections be disposed?
+
+The managed connection object wraps external resources such as sockets. Disposing returns the connection to the pool and releases related resources promptly.
+
 ## Quick Map
 
-| Concept | Short version |
-| --- | --- |
-| Managed memory | Memory controlled by the CLR and reclaimed by the GC. |
-| Unmanaged resource | External OS/runtime resource such as a handle, socket, native allocation, or database connection. |
-| `IDisposable` | Pattern used to release unmanaged or expensive resources deterministically. |
-| Connection pooling | Reuses database connections instead of opening a fresh one each time. |
+### Managed memory
+
+Short version: Memory controlled by the CLR and reclaimed by the garbage collector.
+
+### Unmanaged resource
+
+Short version: External OS/runtime resource such as a handle, socket, native allocation, or database connection.
+
+### `IDisposable`
+
+Short version: Pattern used to release unmanaged or expensive resources deterministically.
+
+### Connection pooling
+
+Short version: Reuses database connections instead of opening a fresh one each time.
 
 ## Managed Vs Unmanaged Memory
 

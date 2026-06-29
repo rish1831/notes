@@ -1,5 +1,37 @@
 # Equality in C#
 
+## Quick Lookup
+
+### `==`
+
+Short version: Operator selected from compile-time operand types.
+
+### `Equals()`
+
+Short version: Method that can dispatch based on runtime type.
+
+### `ReferenceEquals`
+
+Short version: Checks whether two references point to the same object.
+
+### `GetHashCode()`
+
+Short version: Hash-based collections use it to find a bucket.
+
+### `IEquatable<T>`
+
+Short version: Strongly typed equality for the same type.
+
+## Most Important FAQ
+
+### What is the interview-safe difference between `==` and `Equals()`?
+
+`==` is an operator and `Equals()` is a method. Both can be customized. Normal classes usually compare references, while strings and records compare values.
+
+### What is the hash code rule?
+
+If two objects are equal, they must return the same hash code. Different objects can still have the same hash code.
+
 ## `==` vs `Equals()`
 
 **Interview answer:** `==` is an operator and `Equals()` is a method. Both can be customized. Normal classes usually compare references; strings and records compare values.

@@ -1,5 +1,15 @@
 # Extension Methods in C#
 
+## Most Important FAQ
+
+### What are extension methods?
+
+Extension methods are static methods that appear like instance methods on an existing type. They add convenient syntax without modifying the original type.
+
+### What wins if an instance method and extension method have the same signature?
+
+The real instance method wins. Extension methods are considered only when no matching instance method is found.
+
 ## What are extension methods?
 
 Extension methods are static methods that can be called using instance-method syntax. They let you add operations to an existing type without modifying that type, creating a derived type, or recompiling its source code.
@@ -209,13 +219,25 @@ Avoid them when:
 
 ## Extension methods vs alternatives
 
-| Approach | Best suited for |
-|---|---|
-| Instance method | Core behavior of a type you own |
-| Extension method | Stateless convenience behavior around an existing contract |
-| Inheritance | A true substitutable specialization with overridable behavior |
-| Service | Operations involving dependencies, orchestration, I/O, or business workflows |
-| Decorator | Adding runtime behavior while preserving an interface |
+### Instance method
+
+Best suited for: Core behavior of a type you own.
+
+### Extension method
+
+Best suited for: Stateless convenience behavior around an existing contract.
+
+### Inheritance
+
+Best suited for: A true substitutable specialization with overridable behavior.
+
+### Service
+
+Best suited for: Operations involving dependencies, orchestration, I/O, or business workflows.
+
+### Decorator
+
+Best suited for: Adding runtime behavior while preserving an interface.
 
 ## Important interview points
 

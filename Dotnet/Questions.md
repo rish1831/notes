@@ -1,4 +1,15 @@
-For **4 years .NET Backend / Full Stack experience**, these are the kinds of questions I'd expect in interviews:
+# .NET Interview Question Bank
+
+For **4 years .NET Backend / Full Stack experience**, these are the kinds of questions to expect in interviews.
+
+## How To Use This File
+
+1. Pick one section.
+2. Answer each question aloud.
+3. Open the topic note when you cannot answer confidently.
+4. Mark weak topics for another pass.
+
+## Questions
 
 ### C# / .NET
 

@@ -1,41 +1,66 @@
 # .NET SSE Revision Notes
 
-## Topics
+Use this README as the lookup page. For revision, open the topic file, read the Most Important FAQ first, then use the examples and follow-ups.
 
-1. [Async and Concurrency](AsyncAwait.md)
-   - Async state machines, tasks, threads, ThreadPool, contexts, deadlocks, parallelism, cancellation, and common pitfalls.
+## Fast Lookup
 
-2. [Delegates and Events](DelegatesAndEvents.md)
-   - Delegates, events, `Action`, `Func`, `Predicate`, variance, multicast behavior, and event lifetime issues.
+| Topic | File | Key questions |
+| --- | --- | --- |
+| Async and concurrency | [AsyncAwait.md](AsyncAwait.md) | `async` internals, `Task` vs `Thread`, deadlocks, `ConfigureAwait`, cancellation |
+| Delegates and events | [DelegatesAndEvents.md](DelegatesAndEvents.md) | Delegates, events, `Action`, `Func`, variance, multicast delegates |
+| Dependency Injection | [DependencyInjection/README.md](DependencyInjection/README.md) | DI vs IoC, lifetimes, factories, multiple implementations, service resolution |
+| CLR | [CLR/README.md](CLR/README.md) | JIT, IL, stack/heap, GC, LOH, managed/unmanaged memory |
+| Extension methods | [ExtensionMethods.md](ExtensionMethods.md) | Syntax, resolution rules, namespace scope, generic extensions |
+| Attributes | [Attributes.md](Attributes.md) | Metadata, custom attributes, reflection, ASP.NET Core attributes |
+| Reflection | [Reflection.md](Reflection.md) | Runtime metadata, dynamic invocation, costs, alternatives |
+| Expression trees | [ExpressionTrees.md](ExpressionTrees.md) | Code as data, LINQ providers, expression vs delegate |
+| Type system | [TypeSystem.md](TypeSystem.md) | Boxing, structs/classes, records, nullable reference types |
+| OOP | [ObjectOrientedProgramming.md](ObjectOrientedProgramming.md) | Abstract class vs interface, virtual/abstract, override vs new, sealed |
+| Equality | [Equality.md](Equality.md) | `==`, `Equals`, `GetHashCode`, `IEquatable<T>` |
+| Resource management | [ResourceManagement.md](ResourceManagement.md) | `IDisposable`, finalizers, deterministic cleanup |
+| Question bank | [Questions.md](Questions.md) | Topic-wise interview question checklist |
 
-3. [Extension Methods](ExtensionMethods.md)
-   - Syntax, resolution rules, generic extensions, API design guidance, limitations, and interview points.
+## Most Important FAQ
 
-4. [Attributes](Attributes.md)
-   - Metadata, reflection, custom attributes, target rules, ASP.NET Core usage, performance, and interview pitfalls.
+### What should I revise first for .NET interviews?
 
-5. [Reflection](Reflection.md)
-   - Runtime metadata inspection, dynamic invocation, use cases, costs, and alternatives.
+Start with async, DI lifetimes, CLR memory/GC, equality, and OOP basics. These are the highest-frequency topics and they connect to many follow-up questions.
 
-6. [Expression Trees](ExpressionTrees.md)
-   - Code as data, delegates vs expressions, LINQ providers, translation, and limitations.
+### How should I revise one topic?
 
-7. [Type System](TypeSystem.md)
-   - Boxing, structs, classes, records, and nullable reference types.
+1. Read the quick lookup table.
+2. Answer the Most Important FAQ without looking.
+3. Recreate the smallest code snippet from memory.
+4. Answer the follow-ups.
+5. Say one production pitfall aloud.
 
-8. [Object-Oriented Programming](ObjectOrientedProgramming.md)
-   - Abstract classes, interfaces, virtual and abstract methods, and sealed types.
+### How should I handle large topics?
 
-9. [Equality](Equality.md)
-   - `==`, `Equals`, hash codes, `IEquatable<T>`, and equality contracts.
+Large topics are split into folders or separate files. For example, Dependency Injection now has one file per subtopic under [DependencyInjection](DependencyInjection/README.md).
 
-10. [Resource Management](ResourceManagement.md)
-    - `IDisposable`, finalizers, deterministic cleanup, and implementation patterns.
+## Normal FAQ
 
-11. [CLR](CLR/README.md)
-    - Object allocation, CLR execution flow, IL, JIT, garbage collection, LOH, memory leaks, managed/unmanaged resources, and connection pooling.
+### Where are CLR notes?
 
-## Suggested revision method
+Open [CLR/README.md](CLR/README.md). It links memory, runtime execution, garbage collection, and managed/unmanaged memory notes.
+
+### Where are DI notes?
+
+Open [DependencyInjection/README.md](DependencyInjection/README.md). The original [DependencyInjection/DI.md](DependencyInjection/DI.md) file is now a short entry point.
+
+### Where should new notes go?
+
+Create one file per topic unless the note is very small. If a file becomes long and covers unrelated questions, split it into a folder with its own `README.md`.
+
+## Revision Priority
+
+| Priority | Topics |
+| --- | --- |
+| Must know | Async, DI, CLR memory, GC, equality, OOP |
+| Strong follow-up topics | Reflection, attributes, extension methods, resource management |
+| Advanced/nice to know | Expression trees, deep runtime details |
+
+## Suggested Revision Method
 
 1. Read the quick-revision table or concise answer first.
 2. Explain the topic aloud without looking at the note.

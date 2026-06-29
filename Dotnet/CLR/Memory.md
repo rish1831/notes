@@ -2,15 +2,37 @@
 
 Use this page for the core memory model: object creation, heap vs stack, object references, and allocation failure.
 
+## Most Important FAQ
+
+### What happens when you create an object?
+
+The CLR allocates memory for the object, initializes its fields, runs the constructor, and returns a reference to the created object.
+
+### Are all value types stored on the stack?
+
+No. Value type storage depends on where the value lives. A value type field inside a class lives inside the object on the heap.
+
 ## Quick Map
 
-| Concept | Short version |
-| --- | --- |
-| Object allocation | `new` creates the object on the managed heap and returns a reference. |
-| Reference variable | The variable stores a reference to the heap object, usually on the stack when it is local. |
-| Object lifetime | The object remains alive while it is reachable from GC roots. |
-| Stack | Stores method frames, parameters, and short-lived local data. |
-| Heap | Stores objects and reference-type instances managed by the GC. |
+### Object allocation
+
+Short version: `new` creates the object on the managed heap and returns a reference.
+
+### Reference variable
+
+Short version: The variable stores a reference to the heap object. If it is a local variable, that reference usually lives on the stack.
+
+### Object lifetime
+
+Short version: The object remains alive while it is reachable from GC roots.
+
+### Stack
+
+Short version: Stores method frames, parameters, and short-lived local data.
+
+### Heap
+
+Short version: Stores objects and reference-type instances managed by the garbage collector.
 
 ## What Happens When You Create An Object?
 
