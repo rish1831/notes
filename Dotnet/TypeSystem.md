@@ -1,0 +1,79 @@
+# C# Type System
+
+## Boxing and unboxing
+
+**Interview answer:** Boxing wraps a value type as `object`, normally causing an allocation. Unboxing extracts the original value type.
+
+**In simple words:** Boxing puts a value inside an object box; unboxing takes it back out.
+
+```csharp
+int number = 10;
+object boxed = number;
+int result = (int)boxed;
+```
+
+Generics such as `List<int>` help avoid boxing.
+
+**Catch:** Unboxing must use the exact original value type. A boxed `int` cannot be directly unboxed as `long`, even though an `int` can normally be converted to `long`.
+
+## Struct vs class
+
+**Interview answer:** A struct is a value type, so assignment copies its value. A class is a reference type, so assignment copies a reference to the same object.
+
+**In simple words:** Copying a struct creates another value; copying a class variable gives another pointer to the same object.
+
+Use structs for small, preferably immutable values. Use classes for entities, larger objects, shared state, and inheritance.
+
+**Catch:** Structs are not always stored on the stack. Also, copying a mutable struct creates a separate value, which can produce surprising behavior.
+
+## Record vs class
+
+**Interview answer:** A record is designed for value-like data and provides value equality by default. A normal class uses reference equality unless equality is implemented manually.
+
+**In simple words:** Two records with the same data are considered equal; two normal class objects are usually different objects.
+A record is also a reference type (unless it's a record struct), but it is designed for data rather than behavior.
+
+A class is generally used to model objects with behavior and mutable state. A record is designed for data-centric objects and provides value-based equality, immutability support, deconstruction, and non-destructive mutation through the with expression. Records are commonly used for DTOs, events, and messages, while classes are used for domain models and services.
+
+```csharp
+public record User(string Name);
+
+Console.WriteLine(new User("Sam") == new User("Sam")); // True
+
+
+Immutability
+
+Records encourage immutable objects.
+
+public record Person(string Name);
+
+You can't do:
+
+person.Name = "John";
+
+Instead:
+
+var p2 = p1 with { Name = "John" };
+
+The with expression creates a copy.
+
+```
+
+**Catch:** A record class is still a reference type. Its generated equality compares its data, but reference-type properties inside it may still use their own equality behavior.
+
+That’s a great question! Structs are value types, meaning they’re copied when passed around, while records are reference types by default. The key difference is that records give you built-in, value-based equality and immutability patterns, which are perfect for data-centric scenarios. Structs are more about being lightweight and efficient for small data that you expect to copy (like coordinates or colors). Records are designed for scenarios like representing a data transfer object, a message, or an immutable model, where equality, immutability, and expressiveness matter. In short, use structs for small, frequently copied data, and use records when you want elegant, immutable, data-oriented types with built-in equality semantics.
+
+## Nullable reference types
+
+**Interview answer:** Nullable reference types let the compiler warn about possible null-reference errors. `string` means null is not expected; `string?` means it is allowed.
+
+**In simple words:** They help catch likely null mistakes before the program runs.
+
+```csharp
+string name = "Sam";
+string? optionalName = null;
+```
+
+They are compile-time checks, not a new runtime type. `!` only suppresses a warning; it does not perform a null check.
+
+**Catch:** Nullable warnings do not prevent null at runtime. Values from reflection, old libraries, deserialization, or incorrectly annotated code can still violate the declared contract.
